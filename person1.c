@@ -23,10 +23,7 @@ int main(void)
 	int rv;
 	int sockfd;
 	int numBytes;
-	socklen_t addr_len;
 	char buf[MAXBUFLEN];
-	char s[INET6_ADDRSTRLEN];
-	struct sockaddr_storage their_addr;
 	struct addrinfo hints, *servinfo, *p;
 
 	// adding this processes' info
@@ -89,7 +86,7 @@ int main(void)
 			exit(1);
 		}
 
-		if((numBytes = recvfrom(sockfd, buf, MAXBUFLEN-1, 0, (struct sockaddr *)&their_addr, &addr_len)) == -1){
+		if((numBytes = recvfrom(sockfd, buf, MAXBUFLEN-1, 0, NULL, NULL)) == -1){
 			perror("recvfrom");
 			exit(1);
 		}

@@ -14,9 +14,7 @@ int main(void)
 	int rv;
 	int sockfd;
 	int numBytes;
-	socklen_t addr_len;
 	char buf[MAXBUFLEN];
-	struct sockaddr_storage their_addr;
 	struct addrinfo hints, *servinfo, *p;
 
 	// adding this processes' info
@@ -69,7 +67,7 @@ int main(void)
 	printf("please wait for the other person to start the chat...!!!\n");
 	while(1){
 		printf("p2>>> ");
-		if((numBytes = recvfrom(sockfd, buf, MAXBUFLEN-1, 0, (struct sockaddr *)&their_addr, &addr_len)) == -1){
+		if((numBytes = recvfrom(sockfd, buf, MAXBUFLEN-1, 0, NULL, NULL)) == -1){
 			perror("sent");
 			exit(1);
 		}
